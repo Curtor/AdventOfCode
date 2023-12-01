@@ -10,9 +10,8 @@ public class HillClimbing : DaySolution2022 {
         return dir;
     }
 
-    public override void Run(List<string> input) {
-        Grid<HillPoint> grid = new Grid<HillPoint>(input[0].Length, input.Count);
-        grid.SetValues(coord => GetValue(input, coord));
+    public override void Part1(List<string> input) {
+        Grid<HillPoint> grid = CreateGrid(input);
         grid.SetNeighbors(IsNeighbor);
 
         GridNode<HillPoint> start = grid.AllNodes().First(n => n.value.isStart);
@@ -20,15 +19,23 @@ public class HillClimbing : DaySolution2022 {
         int stepCount = directions.Steps.Count();
 
         Console.WriteLine($"Start Steps: {stepCount}");
+    }
 
+    public override void Part2(List<string> input) {
+        Grid<HillPoint> grid = CreateGrid(input);
         grid.SetNeighbors(IsReverseNeighbor);
 
-        start = grid.AllNodes().First(n => n.value.isEnd);
-        directions = start.GetRoute(grid.AllNodes().Where(n => n.value.raw == 'a'));
-        stepCount = directions.Steps.Count();
+        GridNode<HillPoint> start = grid.AllNodes().First(n => n.value.isEnd);
+        Directions directions = start.GetRoute(grid.AllNodes().Where(n => n.value.raw == 'a'));
+        int stepCount = directions.Steps.Count();
 
         Console.WriteLine($"Min Steps: {stepCount}");
+    }
 
+    private Grid<HillPoint> CreateGrid(List<string> input) {
+        Grid<HillPoint> grid = new Grid<HillPoint>(input[0].Length, input.Count);
+        grid.SetValues(coord => GetValue(input, coord));
+        return grid;
     }
 
     private HillPoint GetValue(List<string> input, GridNode<HillPoint> node) {

@@ -1,22 +1,46 @@
-﻿namespace csteeves;
+﻿
+namespace csteeves;
 
 public abstract class DaySolution {
 
     public void RunDebug() {
-        Run(File.ReadLines(GetFullFilename(Runner.DEBUG_INPUT)).ToList());
+        Run(Runner.DEBUG_INPUT, Runner.DEBUG_ALT_INPUT);
     }
 
     public void Run() {
-        Run(File.ReadLines(GetFullFilename(Runner.REAL_INPUT)).ToList());
-    }
-
-    private string GetFullFilename(string filename) {
-        return Path.Combine(Runner.PATH, GetYear(), Dir(), "Input", filename);
+        Run(Runner.REAL_INPUT, Runner.REAL_ALT_INPUT);
     }
 
     public abstract string GetYear();
 
     public abstract string Dir();
 
-    public abstract void Run(List<string> input);
+    private void Run(string filename, string partTwoFilename) {
+        List<string>? input = ReadLines(filename);
+        List<string>? partTwoInput = ReadLines(partTwoFilename);
+
+        if (input == null) {
+            throw new FileNotFoundException(filename);
+        }
+
+        Part1(input);
+        Console.WriteLine();
+        Part2(partTwoInput ?? input);
+    }
+
+    private List<string>? ReadLines(string filename) {
+        string fullFilename = GetFullFilename(filename);
+        if (!File.Exists(fullFilename)) {
+            return null;
+        }
+        return File.ReadLines(fullFilename).ToList();
+    }
+
+    private string GetFullFilename(string filename) {
+        return Path.Combine(Runner.PATH, GetYear(), Dir(), "Input", filename);
+    }
+
+    public abstract void Part1(List<string> input);
+
+    public abstract void Part2(List<string> input);
 }

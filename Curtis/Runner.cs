@@ -5,11 +5,15 @@ using System.Diagnostics;
 public class Runner {
 
     public const string PATH = @"F:\Coding\AdventOfCode\Curtis\";
-    public const string DEBUG_INPUT = "Debug.txt";
-    public const string REAL_INPUT = "Input.txt";
 
-    private static int year = 2021;
-    private static int day = 3;
+    public const string DEBUG_INPUT = "Debug.txt";
+    public const string DEBUG_ALT_INPUT = "DebugPart2.txt";
+
+    public const string REAL_INPUT = "Input.txt";
+    public const string REAL_ALT_INPUT = "InputPart2.txt";
+
+    private static int year = 2022;
+    private static int day = 12;
     private static bool debugOnly = false;
 
     private static void Main() {

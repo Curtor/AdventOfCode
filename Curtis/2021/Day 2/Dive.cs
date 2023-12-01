@@ -8,20 +8,9 @@ public class Dive : DaySolution2021 {
         return dir;
     }
 
-    public override void Run(List<string> input) {
-        List<SubCommand> commands = [];
-        foreach (string line in input) {
-            List<string> tokens = LineParser.Tokens(line);
-            SubCommand command = new SubCommand(tokens);
-            commands.Add(command);
-        }
+    public override void Part1(List<string> input) {
+        List<SubCommand> commands = GetSubCommands(input);
 
-        Part1(commands);
-        Console.WriteLine("----");
-        Part2(commands);
-    }
-
-    public void Part1(List<SubCommand> commands) {
         int depth = 0;
         int distance = 0;
 
@@ -48,7 +37,9 @@ public class Dive : DaySolution2021 {
         Console.WriteLine($"Product: {depth * distance}");
     }
 
-    public void Part2(List<SubCommand> commands) {
+    public override void Part2(List<string> input) {
+        List<SubCommand> commands = GetSubCommands(input);
+
         int depth = 0;
         int distance = 0;
         int aim = 0;
@@ -76,5 +67,15 @@ public class Dive : DaySolution2021 {
         Console.WriteLine($"Distance: {distance}");
         Console.WriteLine($"Aim: {aim}");
         Console.WriteLine($"Product: {depth * distance}");
+    }
+
+    private static List<SubCommand> GetSubCommands(List<string> input) {
+        List<SubCommand> commands = [];
+        foreach (string line in input) {
+            List<string> tokens = LineParser.Tokens(line);
+            SubCommand command = new SubCommand(tokens);
+            commands.Add(command);
+        }
+        return commands;
     }
 }

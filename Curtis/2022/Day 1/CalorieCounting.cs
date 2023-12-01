@@ -8,7 +8,18 @@ public class CalorieCounting : DaySolution2022 {
         return dir;
     }
 
-    public override void Run(List<string> input) {
+    public override void Part1(List<string> input) {
+        List<int> caloriePacks = GetCaloriePacks(input);
+        Console.WriteLine($"Max calories: {caloriePacks.First()}");
+    }
+
+    public override void Part2(List<string> input) {
+        List<int> caloriePacks = GetCaloriePacks(input);
+        int firstThree = caloriePacks[0] + caloriePacks[1] + caloriePacks[2];
+        Console.WriteLine($"First 3 combined: {firstThree}");
+    }
+
+    private static List<int> GetCaloriePacks(List<string> input) {
         List<int> caloriePacks = [];
         int runningCalories = 0;
 
@@ -26,10 +37,6 @@ public class CalorieCounting : DaySolution2022 {
 
         caloriePacks.Sort();
         caloriePacks.Reverse();
-
-        Console.WriteLine($"Max calories: {caloriePacks.First()}");
-
-        int firstThree = caloriePacks[0] + caloriePacks[1] + caloriePacks[2];
-        Console.WriteLine($"First 3 combined: {firstThree}");
+        return caloriePacks;
     }
 }

@@ -8,7 +8,7 @@ public class SonarSweep : DaySolution2021 {
         return dir;
     }
 
-    public override void Run(List<string> input) {
+    public override void Part1(List<string> input) {
         int increaseCount = 0;
         int lastReading = int.Parse(input[0]);
 
@@ -21,13 +21,16 @@ public class SonarSweep : DaySolution2021 {
         }
 
         Console.WriteLine($"Increases: {increaseCount}");
+    }
 
+
+    public override void Part2(List<string> input) {
         CircularQueue<int> sweeps = new CircularQueue<int>(3);
         sweeps.Enqueue(int.Parse(input[0]));
         sweeps.Enqueue(int.Parse(input[1]));
         sweeps.Enqueue(int.Parse(input[2]));
 
-        increaseCount = 0;
+        int increaseCount = 0;
         int lastSweep = GetSweepSum(sweeps);
 
         for (int i = 3; i < input.Count; i++) {

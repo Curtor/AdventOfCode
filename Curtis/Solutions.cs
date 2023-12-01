@@ -42,8 +42,8 @@ public static class Solutions {
             {new Vector2Int(2022, 25),  null },
 
             // 2023
-            {new Vector2Int(2023, 1),  new Day1() },
-            {new Vector2Int(2023, 2),  null },
+            {new Vector2Int(2023, 1),  new Trebuchet() },
+            {new Vector2Int(2023, 2),  new Day2() },
             {new Vector2Int(2023, 3),  null },
             {new Vector2Int(2023, 4),  null },
             {new Vector2Int(2023, 5),  null },

@@ -8,15 +8,8 @@ public class BinaryDiagnostic : DaySolution2021 {
         return dir;
     }
 
-    public override void Run(List<string> input) {
-        List<byte[]> bytesList = [];
-        foreach (string line in input) {
-            bytesList.Add(LineParser.ToBytes(line));
-        }
-
-        Part1(input[0].Length, bytesList);
-        Console.WriteLine();
-        Part2(bytesList);
+    public override void Part1(List<string> input) {
+        Part1(input[0].Length, ToBytes(input));
     }
 
     public void Part1(int lineLength, List<byte[]> values) {
@@ -58,8 +51,17 @@ public class BinaryDiagnostic : DaySolution2021 {
         Console.WriteLine($"Consumption : {gamma * epsilon}");
     }
 
-    public void Part2(List<byte[]> commands) {
+    public override void Part2(List<string> input) {
         Console.WriteLine("Part 2");
         Console.WriteLine("Answer: <Not Implemented>");
+    }
+
+    private List<byte[]> ToBytes(List<string> input) {
+        List<byte[]> bytesList = [];
+        foreach (string line in input) {
+            bytesList.Add(LineParser.ToBytes(line));
+        }
+
+        return bytesList;
     }
 }
