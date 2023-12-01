@@ -2,10 +2,8 @@ namespace csteeves.Advent2021;
 
 public class Dive : DaySolution2021 {
 
-    private const string dir = "Day 02";
-
     public override string Dir() {
-        return dir;
+        return "Day 02";
     }
 
     public override void Part1(List<string> input) {

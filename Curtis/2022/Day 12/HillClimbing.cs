@@ -4,10 +4,8 @@ using Directions = Directions<Move<GridNode<HillPoint>, HillPoint>, GridNode<Hil
 
 public class HillClimbing : DaySolution2022 {
 
-    private const string dir = "Day 12";
-
     public override string Dir() {
-        return dir;
+        return "Day 12";
     }
 
     public override void Part1(List<string> input) {

@@ -2,10 +2,8 @@ namespace csteeves.Advent2023;
 
 public class Trebuchet : DaySolution2023 {
 
-    private const string dir = "Day 01";
-
     public override string Dir() {
-        return dir;
+        return "Day 01";
     }
 
     public override void Part1(List<string> input) {

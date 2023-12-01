@@ -2,10 +2,8 @@
 
 public class BinaryDiagnostic : DaySolution2021 {
 
-    private const string dir = "Day 03";
-
     public override string Dir() {
-        return dir;
+        return "Day 03";
     }
 
     public override void Part1(List<string> input) {

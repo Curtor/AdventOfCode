@@ -2,10 +2,8 @@
 
 public class Template2023 : DaySolution2023 {
 
-    private const string dir = "Day X";
-
     public override string Dir() {
-        return dir;
+        return "Day XX";
     }
 
     public override void Part1(List<string> input) {

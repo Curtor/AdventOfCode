@@ -2,10 +2,8 @@
 
 public class RockPaperScissors : DaySolution2022 {
 
-    private const string dir = "Day 02";
-
     public override string Dir() {
-        return dir;
+        return "Day 02";
     }
 
     public override void Part1(List<string> input) {

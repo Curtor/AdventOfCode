@@ -70,7 +70,7 @@ public static class Solutions {
         };
 
     public static DaySolution? Get(int year, int day) {
-        return solutions[new Vector2Int(year, day)];
+        return solutions.GetValueOrDefault(new Vector2Int(year, day));
     }
 
 }

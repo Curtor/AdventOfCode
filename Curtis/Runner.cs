@@ -12,7 +12,7 @@ public class Runner {
     public const string REAL_INPUT = "Input.txt";
     public const string REAL_ALT_INPUT = "InputPart2.txt";
 
-    private static int year = 2022;
+    private static int year = 2023;
     private static int day = 2;
     private static bool debugOnly = false;
 
@@ -21,11 +21,15 @@ public class Runner {
         DaySolution? solution = Solutions.Get(year, day);
 
         if (solution == null) {
-            Console.WriteLine($"No solution yet for day {day} of year {year}");
+            Console.WriteLine($"No solution yet for {year} day {day}");
             return;
         }
 
 
+        Console.WriteLine("---- ---- ---- ----");
+        Console.WriteLine();
+        Console.WriteLine($" ~~ {solution.GetType().Name} ~~");
+        Console.WriteLine();
         Console.WriteLine("---- ---- ---- ----");
         Console.WriteLine();
         Console.WriteLine("TESTING:");
