@@ -1,3 +1,5 @@
+namespace csteeves;
+
 public class Vector2Int {
 
     public static readonly Vector2Int ORIGIN = new Vector2Int(0, 0);
@@ -15,7 +17,9 @@ public class Vector2Int {
     }
 
     public float Distance(Vector2Int other) {
-        return MathF.Sqrt((x * x) + (y * y));
+        int deltaX = other.x - x;
+        int deltaY = other.y - y;
+        return MathF.Sqrt((deltaX * deltaX) + (deltaY * deltaY));
     }
 
     public override int GetHashCode() {
