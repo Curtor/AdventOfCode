@@ -9,7 +9,7 @@ public class Runner {
     public const string REAL_INPUT = "Input.txt";
 
     private static int year = 2021;
-    private static int day = 1;
+    private static int day = 2;
     private static bool debugOnly = false;
 
     private static void Main() {

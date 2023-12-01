@@ -43,7 +43,6 @@ public class SonarSweep : DaySolution2021 {
         }
 
         Console.WriteLine($"Sweep increases: {increaseCount}");
-
     }
 
     private int GetSweepSum(CircularQueue<int> sweeps) {
