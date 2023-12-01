@@ -5,4 +5,9 @@ public class LineParser {
     public static List<string> Tokens(string input, string delimiter = " ") {
         return input.Split(delimiter).ToList();
     }
+
+    public static byte[] ToBytes(string input) {
+        ulong value = Convert.ToUInt64(input, 2);
+        return BitConverter.GetBytes(value);
+    }
 }

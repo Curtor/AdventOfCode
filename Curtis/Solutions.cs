@@ -12,6 +12,7 @@ public static class Solutions {
             // 2022
             {new Vector2Int(2021, 1),  new SonarSweep() },
             {new Vector2Int(2021, 2),  new Dive() },
+            {new Vector2Int(2021, 3),  new BinaryDiagnostic() },
 
             // 2022
             {new Vector2Int(2022, 1),  new CalorieCounting() },
