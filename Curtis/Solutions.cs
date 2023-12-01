@@ -1,5 +1,6 @@
 ﻿namespace csteeves;
 
+using csteeves.Advent2021;
 using csteeves.Advent2022;
 using csteeves.Advent2023;
 
@@ -7,6 +8,9 @@ public static class Solutions {
 
     private static Dictionary<Vector2Int, DaySolution?> solutions =
         new Dictionary<Vector2Int, DaySolution?> {
+
+            // 2022
+            {new Vector2Int(2021, 1),  new SonarSweep() },
 
             // 2022
             {new Vector2Int(2022, 1),  new CalorieCounting() },

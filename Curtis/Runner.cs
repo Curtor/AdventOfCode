@@ -8,7 +8,7 @@ public class Runner {
     public const string DEBUG_INPUT = "Debug.txt";
     public const string REAL_INPUT = "Input.txt";
 
-    private static int year = 2023;
+    private static int year = 2021;
     private static int day = 1;
     private static bool debugOnly = false;
 
