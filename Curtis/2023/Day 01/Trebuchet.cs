@@ -16,7 +16,6 @@ public class Trebuchet : DaySolution2023 {
             calibrationSum += int.Parse(first.ToString() + last.ToString());
         }
 
-        Console.WriteLine("Part 1");
         Console.WriteLine($"Calibration Sum: {calibrationSum}");
     }
 
@@ -29,7 +28,6 @@ public class Trebuchet : DaySolution2023 {
             calibrationSum += value;
         }
 
-        Console.WriteLine("Part 2");
         Console.WriteLine($"Calibration Sum: {calibrationSum}");
     }
 

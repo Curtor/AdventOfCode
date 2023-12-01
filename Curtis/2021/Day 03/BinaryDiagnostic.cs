@@ -43,14 +43,12 @@ public class BinaryDiagnostic : DaySolution2021 {
             }
         }
 
-        Console.WriteLine("Part 1");
         Console.WriteLine($"Gamma: {gamma}");
         Console.WriteLine($"Epsilon: {epsilon}");
         Console.WriteLine($"Consumption : {gamma * epsilon}");
     }
 
     public override void Part2(List<string> input) {
-        Console.WriteLine("Part 2");
         Console.WriteLine("Answer: <Not Implemented>");
     }
 

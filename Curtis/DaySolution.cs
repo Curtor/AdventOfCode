@@ -23,8 +23,10 @@ public abstract class DaySolution {
             throw new FileNotFoundException(filename);
         }
 
+        Console.WriteLine("Part 1");
         Part1(input);
         Console.WriteLine();
+        Console.WriteLine("Part 2");
         Part2(partTwoInput ?? input);
     }
 

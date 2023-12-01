@@ -23,7 +23,6 @@ public class RucksackReorganization : DaySolution2022 {
             }
         }
 
-        Console.WriteLine("Part 1");
         Console.WriteLine($"Duplicates sum: {sum}");
     }
 
@@ -56,7 +55,6 @@ public class RucksackReorganization : DaySolution2022 {
             }
         }
 
-        Console.WriteLine("Part 2");
         Console.WriteLine($"Badges sum: {sum}");
     }
 

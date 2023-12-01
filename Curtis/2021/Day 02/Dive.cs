@@ -29,7 +29,6 @@ public class Dive : DaySolution2021 {
             }
         }
 
-        Console.WriteLine("Part 1");
         Console.WriteLine($"Depth: {depth}");
         Console.WriteLine($"Distance: {distance}");
         Console.WriteLine($"Product: {depth * distance}");
@@ -60,7 +59,6 @@ public class Dive : DaySolution2021 {
             }
         }
 
-        Console.WriteLine("Part 2");
         Console.WriteLine($"Depth: {depth}");
         Console.WriteLine($"Distance: {distance}");
         Console.WriteLine($"Aim: {aim}");

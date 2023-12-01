@@ -18,7 +18,6 @@ public class RockPaperScissors : DaySolution2022 {
             totalScore += roundScore;
         }
 
-        Console.WriteLine("Part 1");
         Console.WriteLine($"Score: {totalScore}");
     }
 
@@ -36,7 +35,6 @@ public class RockPaperScissors : DaySolution2022 {
             totalScore += roundScore;
         }
 
-        Console.WriteLine("Part 2");
         Console.WriteLine($"Score: {totalScore}");
     }
 }
