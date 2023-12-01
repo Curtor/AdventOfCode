@@ -17,7 +17,7 @@ public static class Solutions {
             // 2022
             {new Vector2Int(2022, 1),  new CalorieCounting() },
             {new Vector2Int(2022, 2),  new RockPaperScissors() },
-            {new Vector2Int(2022, 3),  null },
+            {new Vector2Int(2022, 3),  new RucksackReorganization() },
             {new Vector2Int(2022, 4),  null },
             {new Vector2Int(2022, 5),  null },
             {new Vector2Int(2022, 6),  null },
