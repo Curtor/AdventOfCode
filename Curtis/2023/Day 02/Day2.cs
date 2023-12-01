@@ -2,7 +2,7 @@ namespace csteeves.Advent2023;
 
 public class Day2 : DaySolution2023 {
 
-    private const string dir = "Day 2";
+    private const string dir = "Day 02";
 
     public override string Dir() {
         return dir;

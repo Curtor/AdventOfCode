@@ -2,7 +2,7 @@ namespace csteeves.Advent2022;
 
 public class CalorieCounting : DaySolution2022 {
 
-    private const string dir = "Day 1";
+    private const string dir = "Day 01";
 
     public override string Dir() {
         return dir;

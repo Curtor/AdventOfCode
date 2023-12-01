@@ -2,7 +2,7 @@ namespace csteeves.Advent2021;
 
 public class SonarSweep : DaySolution2021 {
 
-    private const string dir = "Day 1";
+    private const string dir = "Day 01";
 
     public override string Dir() {
         return dir;

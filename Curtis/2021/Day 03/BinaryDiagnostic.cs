@@ -2,7 +2,7 @@
 
 public class BinaryDiagnostic : DaySolution2021 {
 
-    private const string dir = "Day 3";
+    private const string dir = "Day 03";
 
     public override string Dir() {
         return dir;
