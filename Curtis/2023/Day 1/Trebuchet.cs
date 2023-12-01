@@ -4,28 +4,6 @@ public class Trebuchet : DaySolution2023 {
 
     private const string dir = "Day 1";
 
-    private List<string> tokens = [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "one",
-        "two",
-        "three",
-        "four",
-        "five",
-        "six",
-        "seven",
-        "eight",
-        "nine"
-    ];
-
     public override string Dir() {
         return dir;
     }
@@ -64,50 +42,68 @@ public class Trebuchet : DaySolution2023 {
         int lastIndex = -1;
         int lastValue = -1;
 
-        foreach (string token in tokens) {
-            int tokenFirstIndex = line.IndexOf(token);
-            int tokenLastIndex = line.LastIndexOf(token);
+        for (int i = 1; i <= 9; i++) {
+            string token = i.ToString();
 
-            if (tokenFirstIndex >= 0 && tokenFirstIndex < firstIndex) {
-                firstIndex = tokenFirstIndex;
-                firstValue = GetValue(token);
-            }
+            CheckFirst(line, ref firstIndex, ref firstValue, i, token);
+            CheckLast(line, ref lastIndex, ref lastValue, i, token);
 
-            if (tokenLastIndex >= 0 && tokenLastIndex > lastIndex) {
-                lastIndex = tokenLastIndex;
-                lastValue = GetValue(token);
-            }
+            string writtenToken = ToWritten(i);
+            CheckFirst(line, ref firstIndex, ref firstValue, i, writtenToken);
+            CheckLast(line, ref lastIndex, ref lastValue, i, writtenToken);
         }
 
         return Tuple.Create(firstValue, lastValue);
     }
 
-    private int GetValue(string token) {
-        if (token.Length == 1) {
-            return int.Parse(token);
+    private static void CheckFirst(
+            string line,
+            ref int firstIndex,
+            ref int firstValue,
+            int value,
+            string token) {
+        int tokenFirstIndex = line.IndexOf(token);
+        if (tokenFirstIndex >= 0 && tokenFirstIndex < firstIndex) {
+            firstIndex = tokenFirstIndex;
+            firstValue = value;
         }
+    }
 
-        switch (token) {
-            case "one":
-                return 1;
-            case "two":
-                return 2;
-            case "three":
-                return 3;
-            case "four":
-                return 4;
-            case "five":
-                return 5;
-            case "six":
-                return 6;
-            case "seven":
-                return 7;
-            case "eight":
-                return 8;
-            case "nine":
-                return 9;
+    private static void CheckLast(
+            string line,
+            ref int lastIndex,
+            ref int lastValue,
+            int value,
+            string token) {
+        int tokenLastIndex = line.LastIndexOf(token);
+        if (tokenLastIndex >= 0 && tokenLastIndex > lastIndex) {
+            lastIndex = tokenLastIndex;
+            lastValue = value;
+        }
+    }
+
+    private string ToWritten(int value) {
+        switch (value) {
+            case 1:
+                return "one";
+            case 2:
+                return "two";
+            case 3:
+                return "three";
+            case 4:
+                return "four";
+            case 5:
+                return "five";
+            case 6:
+                return "six";
+            case 7:
+                return "seven";
+            case 8:
+                return "eight";
+            case 9:
+                return "nine";
             default:
-                throw new ArgumentException();
+                throw new IndexOutOfRangeException();
         }
     }
 }
