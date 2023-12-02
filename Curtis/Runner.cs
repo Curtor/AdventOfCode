@@ -12,8 +12,8 @@ public class Runner {
     public const string REAL_INPUT = "Input.txt";
     public const string REAL_ALT_INPUT = "InputPart2.txt";
 
-    private static int year = 2021;
-    private static int day = 4;
+    private static int year = 2023;
+    private static int day = 3;
     private static bool debugOnly = false;
 
     private static void Main() {
@@ -67,7 +67,7 @@ public class Runner {
         Console.WriteLine("RunTime: " + GetTime(ts));
     }
     public static string GetTime(TimeSpan ts) {
-        return string.Format("{0:00}:{1:00}:{2:00}.{3:000}",
+        return string.Format("{0:00}h:{1:00}m:{2:00}s.{3:000}ms",
             ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
     }
 }
