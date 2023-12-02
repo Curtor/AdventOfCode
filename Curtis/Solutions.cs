@@ -16,6 +16,7 @@ public static class Solutions {
             {new Vector2Int(2021, 4),  null },
             {new Vector2Int(2021, 5),  new HydrothermalVenture() },
             {new Vector2Int(2021, 6),  new Lanternfish() },
+            {new Vector2Int(2021, 7),  new TreacheryOfWhales() },
 
             // 2022
             {new Vector2Int(2022, 1),  new CalorieCounting() },
