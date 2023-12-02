@@ -25,7 +25,7 @@ public class CubeGame {
         return true;
     }
 
-    internal int Power() {
+    public int Power() {
         int minRed = 0;
         int minGreen = 0;
         int minBlue = 0;

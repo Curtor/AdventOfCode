@@ -1,6 +1,6 @@
 ﻿namespace csteeves;
 
-internal class Grid<T> {
+public class Grid<T> {
 
     public readonly int width;
     public readonly int height;
@@ -75,6 +75,20 @@ internal class Grid<T> {
                 }
                 yield return nodes[x, y];
             }
+        }
+    }
+
+    public void PrettyPrint() {
+        PrettyPrint(v => v?.ToString());
+    }
+
+    public void PrettyPrint(Func<T, string> toString) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                GridNode<T> current = nodes[x, y];
+                Console.Write($"{toString(current.value),-2}");
+            }
+            Console.WriteLine();
         }
     }
 }
