@@ -11,8 +11,6 @@ public class HydrothermalVenture : DaySolution2021 {
         Console.WriteLine($"Overlaps: {answer}");
     }
 
-
-
     public override void Part2(List<string> input) {
         int answer = GetAnswer(input, true);
         Console.WriteLine($"Overlaps: {answer}");
@@ -48,7 +46,7 @@ public class HydrothermalVenture : DaySolution2021 {
             }
         }
 
-        // PrettyPrintGrid(grid);
+        // PrettyPrint(grid);
 
         return overlaps;
     }
@@ -99,7 +97,7 @@ public class HydrothermalVenture : DaySolution2021 {
         }
     }
 
-    private void PrettyPrintGrid(int[,] grid) {
+    private void PrettyPrint(int[,] grid) {
         int height = grid.GetLength(0);
         int width = grid.GetLength(1);
 

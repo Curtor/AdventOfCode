@@ -1,8 +1,10 @@
-﻿namespace csteeves;
+﻿using System.Collections;
 
-public class PriorityQueue<T> {
+namespace csteeves;
 
-    private List<QueueNode> queue = [];
+public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
+
+    private List<QueueNode<T>> queue = [];
 
     private int _heapSize = -1;
     private readonly bool isMinPriorityQueue;
@@ -14,7 +16,7 @@ public class PriorityQueue<T> {
     }
 
     public void Enqueue(float priority, T value) {
-        QueueNode node = new QueueNode(priority, value);
+        QueueNode<T> node = new QueueNode<T>(priority, value);
 
         queue.Add(node);
         _heapSize++;
@@ -36,7 +38,7 @@ public class PriorityQueue<T> {
             throw new InvalidOperationException("Queue is empty");
         }
 
-        QueueNode node = queue[0];
+        QueueNode<T> node = queue[0];
         queue[0] = queue[_heapSize];
         queue.RemoveAt(_heapSize);
         _heapSize--;
@@ -58,13 +60,13 @@ public class PriorityQueue<T> {
         if (_heapSize < 0) {
             throw new InvalidOperationException("Queue is empty");
         }
-        QueueNode node = queue[0];
+        QueueNode<T> node = queue[0];
         return Tuple.Create(node.Priority, node.Value);
     }
 
     public void UpdatePriority(T obj, int priority) {
         for (int i = 0; i <= _heapSize; i++) {
-            QueueNode node = queue[i];
+            QueueNode<T> node = queue[i];
             if (object.ReferenceEquals(node.Value, obj)) {
                 node.Priority = priority;
                 if (isMinPriorityQueue) {
@@ -79,7 +81,7 @@ public class PriorityQueue<T> {
     }
 
     public bool Contains(T obj) {
-        foreach (QueueNode node in queue) {
+        foreach (QueueNode<T> node in queue) {
             if (object.ReferenceEquals(node.Value, obj)) {
                 return true;
             }
@@ -141,7 +143,7 @@ public class PriorityQueue<T> {
     }
 
     private void Swap(int i, int j) {
-        QueueNode temp = queue[i];
+        QueueNode<T> temp = queue[i];
         queue[i] = queue[j];
         queue[j] = temp;
     }
@@ -152,14 +154,11 @@ public class PriorityQueue<T> {
         return i * 2 + 2;
     }
 
-    private class QueueNode {
+    public IEnumerator<QueueNode<T>> GetEnumerator() {
+        return queue.GetEnumerator();
+    }
 
-        public float Priority { get; set; }
-        public T Value { get; set; }
-
-        public QueueNode(float priority, T value) {
-            Priority = priority;
-            Value = value;
-        }
+    IEnumerator IEnumerable.GetEnumerator() {
+        return queue.GetEnumerator();
     }
 }
