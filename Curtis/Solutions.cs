@@ -50,8 +50,8 @@ public static class Solutions {
             // 2023
             {new Vector2Int(2023, 1),  new Trebuchet() },
             {new Vector2Int(2023, 2),  new CubeConundrum() },
-            {new Vector2Int(2023, 3),  new Day3() },
-            {new Vector2Int(2023, 4),  null },
+            {new Vector2Int(2023, 3),  new GearRatios() },
+            {new Vector2Int(2023, 4),  new Day4() },
             {new Vector2Int(2023, 5),  null },
             {new Vector2Int(2023, 6),  null },
             {new Vector2Int(2023, 7),  null },
