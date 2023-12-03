@@ -12,11 +12,16 @@ public class Runner {
     public const string REAL_INPUT = "Input.txt";
     public const string REAL_ALT_INPUT = "InputPart2.txt";
 
-    private static int year = 2023;
-    private static int day = 4;
-    private static bool debugOnly = false;
+    private static readonly int YEAR = 2023;
+    private static readonly int DAY = 4;
+
+    private static readonly bool DEBUG_ONLY = false;
 
     private static void Main() {
+        Run(YEAR, DAY);
+    }
+
+    public static void Run(int year, int day) {
         Stopwatch stopWatch = new Stopwatch();
         DaySolution? solution = Solutions.Get(year, day);
 
@@ -45,7 +50,7 @@ public class Runner {
         Console.WriteLine("---- ---- ---- ----");
         Console.WriteLine();
 
-        if (debugOnly) {
+        if (DEBUG_ONLY) {
             return;
         }
 
