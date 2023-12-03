@@ -17,7 +17,7 @@ public class GearRatios : DaySolution2023 {
                 continue;
             }
 
-            foreach (int partNumber in GetPartNumbers(grid, node, visitedPartNumbers)) {
+            foreach (int partNumber in GetAdjacentPartNumbers(grid, node, visitedPartNumbers)) {
                 Console.WriteLine($"Part number: {partNumber}");
                 sum += partNumber;
             }
@@ -36,7 +36,7 @@ public class GearRatios : DaySolution2023 {
                 continue;
             }
 
-            List<int> adjacentPartNumbers = GetPartNumbers(grid, node).ToList();
+            List<int> adjacentPartNumbers = GetAdjacentPartNumbers(grid, node).ToList();
             if (adjacentPartNumbers.Count == 2) {
                 int rato0 = adjacentPartNumbers[0];
                 int rato1 = adjacentPartNumbers[1];
@@ -54,11 +54,11 @@ public class GearRatios : DaySolution2023 {
 
         Grid<char> grid = new Grid<char>(width, height, true);
         grid.SetValues(node => input[node.coord.y][node.coord.x]);
-        grid.SetNeighbors(IsNeighbors);
+        grid.SetNeighbors(IsNeighbor);
         return grid;
     }
 
-    private bool IsNeighbors(GridNode<char> node, GridNode<char> adjacent) {
+    private bool IsNeighbor(GridNode<char> node, GridNode<char> adjacent) {
         return node.value != '.' && adjacent.value != '.';
     }
 
@@ -66,10 +66,18 @@ public class GearRatios : DaySolution2023 {
         return !char.IsAsciiDigit(c) && c != '.';
     }
 
-    private IEnumerable<int> GetPartNumbers(
+    /** 
+     * If visited is not null, then will ignore part numbers where the node of those numbers are
+     * contained within previously visited nodes.
+     */
+    private IEnumerable<int> GetAdjacentPartNumbers(
              Grid<char> grid,
              GridNode<char> node,
              HashSet<GridNode<char>>? visitedPartNumbers = null) {
+
+        // Initialize the visited set and use it anyway if null
+        // to ensure we don't return the same part number twice
+        // if multiple nodes of the same number are adjacent.
         if (visitedPartNumbers == null) {
             visitedPartNumbers = [];
         }
@@ -84,6 +92,10 @@ public class GearRatios : DaySolution2023 {
         }
     }
 
+    /**
+     * Starting at a given node within the part number, walk right until we get to the start of the
+     * part number, and then build the number by walking back to the right.
+     */
     private int BuildPartNumber(
             Grid<char> grid,
             GridNode<char> node,
