@@ -92,7 +92,7 @@ public class GearRatios : DaySolution2023 {
     }
 
     /**
-     * Starting at a given node within the part number, walk right until we get to the start of the
+     * Starting at a given node within the part number, walk left until we get to the start of the
      * part number, and then build the number by walking back to the right.
      */
     private int BuildPartNumber(
