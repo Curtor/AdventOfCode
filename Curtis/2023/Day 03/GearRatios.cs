@@ -30,7 +30,6 @@ public class GearRatios : DaySolution2023 {
         Grid<char> grid = CreateGrid(input);
 
         int sum = 0;
-
         foreach (GridNode<char> node in grid.AllNodes()) {
             if (node.value != '*') {
                 continue;
@@ -38,10 +37,10 @@ public class GearRatios : DaySolution2023 {
 
             List<int> adjacentPartNumbers = GetAdjacentPartNumbers(grid, node).ToList();
             if (adjacentPartNumbers.Count == 2) {
-                int rato0 = adjacentPartNumbers[0];
+                int ratio0 = adjacentPartNumbers[0];
                 int rato1 = adjacentPartNumbers[1];
-                Console.WriteLine($"Gear ratio: {rato0}:{rato1}");
-                sum += rato0 * rato1;
+                Console.WriteLine($"Gear ratio: {ratio0}:{rato1}");
+                sum += ratio0 * rato1;
             }
         }
 
