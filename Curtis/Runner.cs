@@ -12,8 +12,8 @@ public class Runner {
     public const string REAL_INPUT = "Input.txt";
     public const string REAL_ALT_INPUT = "InputPart2.txt";
 
-    private static readonly int YEAR = 2022;
-    private static readonly int DAY = 6;
+    private static readonly int YEAR = 2023;
+    private static readonly int DAY = 5;
 
     private static readonly bool DEBUG_ONLY = false;
 

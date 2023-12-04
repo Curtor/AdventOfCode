@@ -28,7 +28,7 @@ public static class Solutions {
             {new Vector2Int(2022, 4),  null },
             {new Vector2Int(2022, 5),  null },
             {new Vector2Int(2022, 6),  new TuningTrouble() },
-            {new Vector2Int(2022, 7),  null },
+            {new Vector2Int(2022, 7),  new NoSpaceLeftOnDevice() },
             {new Vector2Int(2022, 8),  null },
             {new Vector2Int(2022, 9),  null },
             {new Vector2Int(2022, 10),  null },
