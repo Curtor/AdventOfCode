@@ -1,4 +1,4 @@
-﻿namespace csteeves;
+﻿namespace csteeves.AdventLibrary;
 
 public class NodeNeighbor<N, T> where N : Node<N, T> {
 

@@ -1,4 +1,4 @@
-﻿namespace csteeves;
+﻿namespace csteeves.AdventLibrary;
 
 public abstract class Node<N, T> where N : Node<N, T> {
 

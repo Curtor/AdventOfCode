@@ -1,5 +1,7 @@
 ﻿namespace csteeves.Advent2021;
 
+using csteeves.AdventLibrary;
+
 public class HydrothermalVenture : DaySolution2021 {
 
     public override string Dir() {

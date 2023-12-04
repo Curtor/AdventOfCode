@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace csteeves;
+namespace csteeves.AdventLibrary;
 
 public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
 

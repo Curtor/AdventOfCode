@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace csteeves;
+namespace csteeves.AdventLibrary;
 
 public class CircularQueue<T> : IEnumerable<T> {
 

@@ -1,5 +1,7 @@
 ﻿namespace csteeves.Advent2021;
 
+using csteeves.AdventLibrary;
+
 public class Lanternfish : DaySolution2021 {
 
     private Dictionary<int, long> reproduction = [];

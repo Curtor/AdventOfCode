@@ -1,6 +1,4 @@
-﻿
-
-namespace csteeves;
+﻿namespace csteeves.AdventLibrary;
 
 public class Line {
 

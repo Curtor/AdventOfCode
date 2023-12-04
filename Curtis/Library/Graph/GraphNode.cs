@@ -1,4 +1,4 @@
-﻿namespace csteeves;
+﻿namespace csteeves.AdventLibrary;
 
 public class GraphNode<N, T> : Node<N, T> where N : GraphNode<N, T> {
 

@@ -1,4 +1,4 @@
-﻿namespace csteeves;
+﻿namespace csteeves.AdventLibrary;
 
 public static class Optional {
     public static Optional<T> Of<T>(T value) {

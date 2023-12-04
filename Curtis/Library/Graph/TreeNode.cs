@@ -1,4 +1,4 @@
-﻿namespace csteeves;
+﻿namespace csteeves.AdventLibrary;
 
 public class TreeNode<N, T> : Node<N, T> where N : TreeNode<N, T> {
 

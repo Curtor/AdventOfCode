@@ -3,6 +3,7 @@
 using csteeves.Advent2021;
 using csteeves.Advent2022;
 using csteeves.Advent2023;
+using csteeves.AdventLibrary;
 
 public static class Solutions {
 
