@@ -1,10 +1,8 @@
 namespace csteeves.Advent2022;
 
-using csteeves.AdventLibrary;
-
-using Directions = AdventLibrary.Directions<
-    AdventLibrary.Move<AdventLibrary.GridNode<HillPoint>, HillPoint>,
-    AdventLibrary.GridNode<HillPoint>,
+using Directions = Directions<
+    Move<GridNode<HillPoint>, HillPoint>,
+    GridNode<HillPoint>,
     HillPoint>;
 
 public class HillClimbing : DaySolution2022 {

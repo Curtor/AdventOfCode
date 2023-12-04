@@ -1,7 +1,5 @@
 ﻿namespace csteeves.Advent2021;
 
-using csteeves.AdventLibrary;
-
 public class SmokeBasin : DaySolution2021 {
 
     private Dictionary<int, long> reproduction = [];

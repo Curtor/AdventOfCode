@@ -1,4 +1,4 @@
-﻿namespace csteeves.AdventLibrary;
+﻿namespace csteeves;
 
 public class Move<N, T> where N : Node<N, T> {
 

@@ -1,4 +1,4 @@
-﻿namespace csteeves.AdventLibrary;
+﻿namespace csteeves;
 
 public static class IEnumerableExt {
 

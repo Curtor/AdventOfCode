@@ -1,7 +1,5 @@
 namespace csteeves.Advent2021;
 
-using csteeves.AdventLibrary;
-
 public class SonarSweep : DaySolution2021 {
 
     public override string Dir() {

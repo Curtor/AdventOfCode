@@ -1,7 +1,5 @@
 namespace csteeves.Advent2023;
 
-using csteeves.AdventLibrary;
-
 public class GearRatios : DaySolution2023 {
 
     public override string Dir() {
