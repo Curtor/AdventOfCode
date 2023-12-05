@@ -53,7 +53,7 @@ public static class Solutions {
             {new Vector2Int(2023, 2),  new CubeConundrum() },
             {new Vector2Int(2023, 3),  new GearRatios() },
             {new Vector2Int(2023, 4),  new Scratchcards() },
-            {new Vector2Int(2023, 5),  new Day5() },
+            {new Vector2Int(2023, 5),  new IfYouGiveASeedAFertilizer() },
             {new Vector2Int(2023, 6),  new Day6() },
             {new Vector2Int(2023, 7),  new Day7() },
             {new Vector2Int(2023, 8),  new Day8() },

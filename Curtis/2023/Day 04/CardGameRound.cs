@@ -3,8 +3,8 @@
 public class CardGameRound {
 
     public readonly int cardNumber;
-    public readonly List<int> winningNumbers;
-    public readonly List<int> yourNumbers;
+    public readonly HashSet<int> winningNumbers;
+    public readonly HashSet<int> yourNumbers;
 
     private List<int>? cachedOverlap = null;
 
@@ -15,8 +15,8 @@ public class CardGameRound {
         List<string> inputTokens = LineParser.Tokens(split[0], ":");
 
         cardNumber = int.Parse(LineParser.Tokens(inputTokens[0])[1]);
-        winningNumbers = LineParser.Tokens(inputTokens[1]).Select(int.Parse).ToList();
-        yourNumbers = LineParser.Tokens(split[1]).Select(int.Parse).ToList();
+        winningNumbers = LineParser.Tokens(inputTokens[1]).Select(int.Parse).ToHashSet();
+        yourNumbers = LineParser.Tokens(split[1]).Select(int.Parse).ToHashSet();
     }
 
     public IEnumerable<int> Overlap() {
