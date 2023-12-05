@@ -32,3 +32,6 @@ obj/
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+# Personal puzzle input
+**/Input/*
