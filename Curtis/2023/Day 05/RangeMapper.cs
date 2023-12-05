@@ -46,13 +46,28 @@ public class RangeMapper {
         return GetRedirects(0, start, length);
     }
 
-    private IEnumerable<Range> GetRedirects(int nextIndex, long start, long length) {
-        if (nextIndex >= Redirects.Count) {
+    private IEnumerable<Range> GetRedirects(int index, long start, long length) {
+        if (index > Redirects.Count || length < 0 || start < 0) {
+            throw new ArgumentOutOfRangeException();
+        }
+
+        if (index == Redirects.Count) {
             yield return new Range(start, length);
             yield break;
         }
 
-        long redirect = Redirects[nextIndex];
+        long redirect = Redirects[index];
+        Range range = redirectLookup[redirect];
+        while (start > redirect + range.length - 1) {
+            index++;
+            if (Redirects.Count == index) {
+                yield return new Range(start, length);
+                yield break;
+            }
+            redirect = Redirects[index];
+            range = redirectLookup[redirect];
+        }
+
         if (start < redirect) {
             long preRange = Math.Min(length, redirect - start);
             yield return new Range(start, preRange);
@@ -65,19 +80,8 @@ public class RangeMapper {
             yield break;
         }
 
-        Range range = redirectLookup[redirect];
-        while (start > redirect + range.length) {
-            nextIndex++;
-            if (Redirects.Count == nextIndex) {
-                yield return new Range(start, length);
-                yield break;
-            }
-            redirect = Redirects[nextIndex];
-            range = redirectLookup[redirect];
-        }
-
         long rangeStart = range.start + start - redirect;
-        long remainingRange = redirect - start + range.length;
+        long remainingRange = range.length - start + redirect;
         long containedRange = Math.Min(length, remainingRange);
         yield return new Range(rangeStart, containedRange);
 
@@ -88,7 +92,7 @@ public class RangeMapper {
             yield break;
         }
 
-        foreach (Range subsequentRange in GetRedirects(nextIndex + 1, start, length)) {
+        foreach (Range subsequentRange in GetRedirects(index + 1, start, length)) {
             yield return subsequentRange;
         }
     }

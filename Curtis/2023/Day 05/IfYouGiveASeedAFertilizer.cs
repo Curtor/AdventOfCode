@@ -18,11 +18,11 @@ public class IfYouGiveASeedAFertilizer : DaySolution2023 {
             long mapping = seed;
             foreach (SeedInfo seedInfo in seedInfoList) {
                 mapping = seedInfo.GetRedirect(mapping);
-                //Console.WriteLine($"{seedInfo} for {seed}: {mapping}");
+                // Console.WriteLine($"{seedInfo} for {seed}: {mapping}");
             }
 
             result = Math.Min(result, mapping);
-            //Console.WriteLine($"Final mapping for {seed}: {mapping}");
+            Console.WriteLine($"Final mapping for {seed}: {mapping}");
         }
 
         Console.WriteLine($"Lowest location: {result}");
@@ -50,9 +50,6 @@ public class IfYouGiveASeedAFertilizer : DaySolution2023 {
             Console.WriteLine($"---");
         }
 
-        // 377494819 too high
-        // 168311412 too high
-        // not 0
         Console.WriteLine($"Lowest location from ranges: {result}");
     }
 
