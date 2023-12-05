@@ -35,7 +35,9 @@ public class SeedInfo {
             // Console.WriteLine(
             //     $"Mapped {mapStart} to {mapEnd} for {input} range {range}: {redirectRange}");
 
-            long rangeResult = NextSeedInfo == null ? redirectRange.start : NextSeedInfo.GetLowestRedirect(redirectRange.start, redirectRange.length);
+            long rangeResult = NextSeedInfo == null
+                ? redirectRange.start
+                : NextSeedInfo.GetLowestRedirect(redirectRange.start, redirectRange.length);
             result = Math.Min(result, rangeResult);
         }
 
