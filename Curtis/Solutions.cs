@@ -55,7 +55,7 @@ public static class Solutions {
             {new Vector2Int(2023, 4),  new Scratchcards() },
             {new Vector2Int(2023, 5),  new IfYouGiveASeedAFertilizer() },
             {new Vector2Int(2023, 6),  new WaitForIt() },
-            {new Vector2Int(2023, 7),  new Day7() },
+            {new Vector2Int(2023, 7),  new CamelCards() },
             {new Vector2Int(2023, 8),  new Day8() },
             {new Vector2Int(2023, 9),  new Day9() },
             {new Vector2Int(2023, 10),  new Day10() },
