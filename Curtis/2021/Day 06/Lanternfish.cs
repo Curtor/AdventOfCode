@@ -18,7 +18,7 @@ public class Lanternfish : DaySolution2021 {
         }
 
         for (int i = 0; i <= 80; i++) {
-            while (queue.PeekNode().Item1 < i) {
+            while (queue.PeekNode().Priority < i) {
                 queue.Dequeue();
                 queue.Enqueue(i + 6, 0);
                 queue.Enqueue(i + 8, 0);

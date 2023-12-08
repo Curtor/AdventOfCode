@@ -30,10 +30,10 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
     }
 
     public T Dequeue() {
-        return DequeueNode().Item2;
+        return DequeueNode().Value;
     }
 
-    public Tuple<float, T> DequeueNode() {
+    public QueueNode<T> DequeueNode() {
         if (_heapSize < 0) {
             throw new InvalidOperationException("Queue is empty");
         }
@@ -49,19 +49,18 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
             MaxHeapify(0);
         }
 
-        return Tuple.Create(node.Priority, node.Value);
+        return node;
     }
 
     public T Peek() {
-        return PeekNode().Item2;
+        return PeekNode().Value;
     }
 
-    public Tuple<float, T> PeekNode() {
+    public QueueNode<T> PeekNode() {
         if (_heapSize < 0) {
             throw new InvalidOperationException("Queue is empty");
         }
-        QueueNode<T> node = queue[0];
-        return Tuple.Create(node.Priority, node.Value);
+        return queue[0];
     }
 
     public void UpdatePriority(T obj, int priority) {

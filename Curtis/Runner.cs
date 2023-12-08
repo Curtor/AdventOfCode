@@ -15,7 +15,7 @@ public class Runner {
     private static readonly int YEAR = 2023;
     private static readonly int DAY = 8;
 
-    private static readonly bool DEBUG_ONLY = true;
+    private static readonly bool DEBUG_ONLY = false;
 
     private static void Main() {
         Run(YEAR, DAY);
