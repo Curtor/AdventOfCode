@@ -45,7 +45,9 @@ public class HauntedWasteland : DaySolution2023 {
         ulong threshold = thresholdIncrement;
         while (!AllCurrentNodesMeetEndCondition(currentNodes)) {
             QueueNode<ulong, CamelNode> nextNode = currentNodes.DequeueNode();
-            CamelNodeStep nextZNode = camelNodeCache.NextZNode(nextNode.Priority, nextNode.Value);
+            ulong minTarget = currentNodes.Last().Priority;
+            CamelNodeStep nextZNode =
+                camelNodeCache.NextZNode(nextNode.Priority, nextNode.Value, minTarget);
 
             if (nextNode.Priority > threshold) {
                 Console.WriteLine(threshold.ToString("N0"));
@@ -55,7 +57,6 @@ public class HauntedWasteland : DaySolution2023 {
             currentNodes.Enqueue(nextZNode.step, nextZNode.node);
         }
 
-        // 16,784,396: Too low
         Console.WriteLine($"Number of ghost steps: {currentNodes.PeekNode().Priority}");
     }
 

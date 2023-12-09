@@ -9,11 +9,18 @@ public class CamelNodeSearch {
         this.directions = directions;
     }
 
-    public CamelNodeStep NextZNode(ulong completedSteps, CamelNode camelNode) {
+    public CamelNodeStep NextZNode(ulong completedSteps, CamelNode camelNode, ulong minTarget) {
         int index = (int)(completedSteps % (ulong)directions.Length);
+        ulong accumulatedSteps = completedSteps;
 
-        CamelNodeStep stepsToNextZ = SearchForZ(index, camelNode);
-        return new CamelNodeStep(completedSteps + stepsToNextZ.step, stepsToNextZ.node);
+        do {
+            CamelNodeStep stepsToNextZ = SearchForZ(index, camelNode);
+            accumulatedSteps += stepsToNextZ.step;
+            camelNode = stepsToNextZ.node;
+        } while (accumulatedSteps < minTarget);
+
+
+        return new CamelNodeStep(accumulatedSteps, camelNode);
     }
 
     public CamelNodeStep SearchForZ(int stepIndex, CamelNode startingCamelNode) {
