@@ -1,11 +1,11 @@
 ﻿namespace csteeves;
 
-public class QueueNode<T> {
+public class QueueNode<C, T> where C : IComparable<C> {
 
-    public float Priority { get; set; }
+    public C Priority { get; set; }
     public T Value { get; private set; }
 
-    public QueueNode(float priority, T value) {
+    public QueueNode(C priority, T value) {
         Priority = priority;
         Value = value;
     }

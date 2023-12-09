@@ -15,6 +15,7 @@ public class Runner {
     private static readonly int YEAR = 2023;
     private static readonly int DAY = 8;
 
+    private static readonly bool RUN_DEBUG = true;
     private static readonly bool DEBUG_ONLY = false;
 
     private static void Main() {
@@ -35,18 +36,22 @@ public class Runner {
         Console.WriteLine();
         Console.WriteLine($" ~~ {solution.GetType().Name} ~~");
         Console.WriteLine();
-        Console.WriteLine("---- ---- ---- ----");
-        Console.WriteLine();
-        Console.WriteLine("TESTING:");
-        Console.WriteLine();
 
-        stopWatch.Start();
-        solution.RunDebug();
-        stopWatch.Stop();
+        if (RUN_DEBUG) {
+            Console.WriteLine("---- ---- ---- ----");
+            Console.WriteLine();
+            Console.WriteLine("TESTING:");
+            Console.WriteLine();
 
-        Console.WriteLine();
-        PrintTime(stopWatch.Elapsed);
-        Console.WriteLine();
+            stopWatch.Start();
+            solution.RunDebug();
+            stopWatch.Stop();
+
+            Console.WriteLine();
+            PrintTime(stopWatch.Elapsed);
+            Console.WriteLine();
+        }
+
         Console.WriteLine("---- ---- ---- ----");
         Console.WriteLine();
 

@@ -2,9 +2,12 @@
 
 using System.Collections;
 
-public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
 
-    private List<QueueNode<T>> queue = [];
+public class PriorityQueue<T> : PriorityQueue<float, T> { }
+
+public class PriorityQueue<P, V> : IEnumerable<QueueNode<P, V>> where P : IComparable<P> {
+
+    private List<QueueNode<P, V>> queue = [];
 
     private int _heapSize = -1;
     private readonly bool isMinPriorityQueue;
@@ -15,8 +18,8 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
         this.isMinPriorityQueue = isMinPriorityQueue;
     }
 
-    public void Enqueue(float priority, T value) {
-        QueueNode<T> node = new QueueNode<T>(priority, value);
+    public void Enqueue(P priority, V value) {
+        QueueNode<P, V> node = new QueueNode<P, V>(priority, value);
 
         queue.Add(node);
         _heapSize++;
@@ -29,16 +32,16 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
         }
     }
 
-    public T Dequeue() {
+    public V Dequeue() {
         return DequeueNode().Value;
     }
 
-    public QueueNode<T> DequeueNode() {
+    public QueueNode<P, V> DequeueNode() {
         if (_heapSize < 0) {
             throw new InvalidOperationException("Queue is empty");
         }
 
-        QueueNode<T> node = queue[0];
+        QueueNode<P, V> node = queue[0];
         queue[0] = queue[_heapSize];
         queue.RemoveAt(_heapSize);
         _heapSize--;
@@ -52,20 +55,20 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
         return node;
     }
 
-    public T Peek() {
+    public V Peek() {
         return PeekNode().Value;
     }
 
-    public QueueNode<T> PeekNode() {
+    public QueueNode<P, V> PeekNode() {
         if (_heapSize < 0) {
             throw new InvalidOperationException("Queue is empty");
         }
         return queue[0];
     }
 
-    public void UpdatePriority(T obj, int priority) {
+    public void UpdatePriority(V obj, P priority) {
         for (int i = 0; i <= _heapSize; i++) {
-            QueueNode<T> node = queue[i];
+            QueueNode<P, V> node = queue[i];
             if (object.ReferenceEquals(node.Value, obj)) {
                 node.Priority = priority;
                 if (isMinPriorityQueue) {
@@ -79,8 +82,8 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
         }
     }
 
-    public bool Contains(T obj) {
-        foreach (QueueNode<T> node in queue) {
+    public bool Contains(V obj) {
+        foreach (QueueNode<P, V> node in queue) {
             if (object.ReferenceEquals(node.Value, obj)) {
                 return true;
             }
@@ -90,14 +93,14 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
     }
 
     private void BuildHeapMax(int i) {
-        while (i >= 0 && queue[(i - 1) / 2].Priority < queue[i].Priority) {
+        while (i >= 0 && queue[(i - 1) / 2].Priority.CompareTo(queue[i].Priority) < 0) {
             Swap(i, (i - 1) / 2);
             i = (i - 1) / 2;
         }
     }
 
     private void BuildHeapMin(int i) {
-        while (i >= 0 && queue[(i - 1) / 2].Priority > queue[i].Priority) {
+        while (i >= 0 && queue[(i - 1) / 2].Priority.CompareTo(queue[i].Priority) > 0) {
             Swap(i, (i - 1) / 2);
             i = (i - 1) / 2;
         }
@@ -108,11 +111,11 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
 
         int heighst = i;
 
-        if (left <= _heapSize && queue[heighst].Priority < queue[left].Priority) {
+        if (left <= _heapSize && queue[heighst].Priority.CompareTo(queue[left].Priority) < 0) {
             heighst = left;
         }
 
-        if (right <= _heapSize && queue[heighst].Priority < queue[right].Priority) {
+        if (right <= _heapSize && queue[heighst].Priority.CompareTo(queue[right].Priority) < 0) {
             heighst = right;
         }
 
@@ -127,11 +130,11 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
 
         int lowest = i;
 
-        if (left <= _heapSize && queue[lowest].Priority > queue[left].Priority) {
+        if (left <= _heapSize && queue[lowest].Priority.CompareTo(queue[left].Priority) > 0) {
             lowest = left;
         }
 
-        if (right <= _heapSize && queue[lowest].Priority > queue[right].Priority) {
+        if (right <= _heapSize && queue[lowest].Priority.CompareTo(queue[right].Priority) > 0) {
             lowest = right;
         }
 
@@ -142,7 +145,7 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
     }
 
     private void Swap(int i, int j) {
-        QueueNode<T> temp = queue[i];
+        QueueNode<P, V> temp = queue[i];
         queue[i] = queue[j];
         queue[j] = temp;
     }
@@ -153,7 +156,7 @@ public class PriorityQueue<T> : IEnumerable<QueueNode<T>> {
         return i * 2 + 2;
     }
 
-    public IEnumerator<QueueNode<T>> GetEnumerator() {
+    public IEnumerator<QueueNode<P, V>> GetEnumerator() {
         return queue.GetEnumerator();
     }
 
