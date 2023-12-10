@@ -32,17 +32,20 @@ public abstract class Node<N, T> where N : Node<N, T> {
         }
     }
 
-    public IEnumerable<Node<N, T>> TraverseDepthFirst() {
-        Stack<Node<N, T>> stack = new Stack<Node<N, T>>();
-        HashSet<Node<N, T>> visited = [];
+    public IEnumerable<N> TraverseDepthFirst() {
+        return TraverseDepthFirst([]);
+    }
 
-        stack.Push(this);
-        visited.Add(this);
+    public IEnumerable<N> TraverseDepthFirst(HashSet<N> visited) {
+        Stack<N> stack = new Stack<N>();
+
+        stack.Push((N)this);
+        visited.Add((N)this);
 
         while (stack.Any()) {
-            Node<N, T> top = stack.Pop();
+            N top = stack.Pop();
             foreach (NodeNeighbor<N, T> nodeNeighbor in top.NextNodes()) {
-                Node<N, T> node = nodeNeighbor.neighbor;
+                N node = nodeNeighbor.neighbor;
                 if (!visited.Contains(node)) {
                     stack.Push(node);
                     visited.Add(node);

@@ -13,7 +13,7 @@ public class Runner {
     public const string REAL_ALT_INPUT = "InputPart2.txt";
 
     private static readonly int YEAR = 2023;
-    private static readonly int DAY = 9;
+    private static readonly int DAY = 11;
 
     private static readonly bool RUN_DEBUG = true;
     private static readonly bool DEBUG_ONLY = false;
