@@ -89,7 +89,7 @@ public class PipeMaze : DaySolution2023 {
         Console.WriteLine($"Enclosed tiles: {enclosedTiles}");
     }
 
-    public Grid<PipeNode> CreateGrid(List<string> input) {
+    private static Grid<PipeNode> CreateGrid(List<string> input) {
         int width = input[0].Length;
         int height = input.Count;
 
@@ -99,7 +99,7 @@ public class PipeMaze : DaySolution2023 {
         return grid;
     }
 
-    private bool IsNeighbor(GridNode<PipeNode> node, GridNode<PipeNode> adjacent) {
+    private static bool IsNeighbor(GridNode<PipeNode> node, GridNode<PipeNode> adjacent) {
         if (node.coord.x == adjacent.coord.x) {
             if (node.coord.y < adjacent.coord.y) {
                 return ConnectedVertical(node.value.value, adjacent.value.value);
@@ -120,12 +120,12 @@ public class PipeMaze : DaySolution2023 {
         throw new ArgumentOutOfRangeException();
     }
 
-    private bool ConnectedVertical(char above, char below) {
+    private static bool ConnectedVertical(char above, char below) {
         return (above == 'S' || above == '|' || above == '7' || above == 'F')
             && (below == 'S' || below == '|' || below == 'J' || below == 'L');
     }
 
-    private bool ConnectedHorizontal(char left, char right) {
+    private static bool ConnectedHorizontal(char left, char right) {
         return (left == 'S' || left == '-' || left == 'F' || left == 'L')
             && (right == 'S' || right == '-' || right == '7' || right == 'J');
     }
@@ -142,7 +142,7 @@ public class PipeMaze : DaySolution2023 {
         throw new ArgumentOutOfRangeException();
     }
 
-    private void UpdateStartNode(GridNode<PipeNode> start) {
+    private static void UpdateStartNode(GridNode<PipeNode> start) {
         List<GridNode<PipeNode>> neighbors = start.Neighbors.Select(n => n.neighbor).ToList();
         if (neighbors.Count != 2) {
             throw new ArgumentOutOfRangeException();
