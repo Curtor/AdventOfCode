@@ -12,7 +12,7 @@ public class HotSprings : DaySolution2023 {
             statuses.Add(new SpringStatus(line));
         }
 
-        int comboSums = GetCombos(statuses);
+        long comboSums = GetCombos(statuses);
 
         Console.WriteLine($"Sum of possible combinations: {comboSums}");
     }
@@ -23,15 +23,15 @@ public class HotSprings : DaySolution2023 {
             statuses.Add(new SpringStatus(line, true));
         }
 
-        int comboSums = GetCombos(statuses);
+        long comboSums = GetCombos(statuses);
 
         Console.WriteLine($"Sum of possible unfolded combinations: {comboSums}");
     }
 
-    private static int GetCombos(List<SpringStatus> statuses) {
-        int comboSums = 0;
+    private static long GetCombos(List<SpringStatus> statuses) {
+        long comboSums = 0;
         foreach (SpringStatus status in statuses) {
-            int possibleCombos = status.GetComboCount();
+            long possibleCombos = status.GetComboCount();
             comboSums += possibleCombos;
             Console.WriteLine($"{possibleCombos} for {status}");
         }

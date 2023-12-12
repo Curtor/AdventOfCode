@@ -1,8 +1,8 @@
-﻿
-
-namespace csteeves.Advent2023;
+﻿namespace csteeves.Advent2023;
 
 public class SpringStatus {
+
+    private static Dictionary<Tuple<string, string>, long> cache = [];
 
     private string statusLine;
     private List<int> damageCounts;
@@ -25,91 +25,102 @@ public class SpringStatus {
         }
     }
 
-    public int GetComboCount() {
-        int totalDamage = damageCounts.Sum();
-        int lengthNeededForDamage = totalDamage + damageCounts.Count() - 1;
-        return GetComboCount(statusLine, damageCounts, totalDamage, lengthNeededForDamage);
+    public long GetComboCount() {
+        return GetComboCount(statusLine, damageCounts);
     }
 
-    private static int GetComboCount(
-        string statusLine, List<int> damageCounts, int totalDamage, int lengthNeededForDamage) {
-        if (!IsComboPossible(statusLine, damageCounts, totalDamage, lengthNeededForDamage)) {
+    private static long GetComboCount(
+            string statusLine, List<int> damageCounts, int damageIndex = 0) {
+        string damageCountsSerialized =
+            damageCounts.GetRange(damageIndex, damageCounts.Count - damageIndex).Join(",");
+        Tuple<string, string> key = Tuple.Create(statusLine, damageCountsSerialized);
+        if (cache.TryGetValue(key, out long cachedResult)) {
+            return cachedResult;
+        }
+
+        if (!IsComboPossible(statusLine, damageCounts, damageIndex)) {
+            cache[key] = 0;
             return 0;
         }
 
-        bool seenDamageLast = false;
-        List<int> recordedDamage = [];
+        int seenDamage = 0;
+        int damageListCount = damageCounts.Count;
 
         for (int i = 0; i < statusLine.Length; i++) {
             char c = statusLine[i];
-            if (c == '.') {
-                if (recordedDamage.Any()
-                    && recordedDamage.Last() != damageCounts[recordedDamage.Count - 1]) {
+
+            if (seenDamage > 0 && damageCounts[damageIndex] == seenDamage) {
+                if (c == '#') {
+                    cache[key] = 0;
                     return 0;
                 }
 
-                seenDamageLast = false;
+                damageIndex++;
+                seenDamage = 0;
+                continue;
+            }
+
+            if (c == '?') {
+                if (seenDamage == 0) {
+                    string statusLineSubstring = statusLine.Substring(i + 1);
+                    long combos =
+                        GetComboCount("#" + statusLineSubstring, damageCounts, damageIndex)
+                        + GetComboCount(statusLineSubstring, damageCounts, damageIndex);
+                    cache[key] = combos;
+                    return combos;
+                }
+
+                seenDamage++;
                 continue;
             }
 
             if (c == '#') {
-                if (!seenDamageLast) {
-                    recordedDamage.Add(1);
-                } else {
-                    recordedDamage[recordedDamage.Count - 1]++;
-                }
-
-                if (recordedDamage.Count > damageCounts.Count
-                    || recordedDamage.Last() > damageCounts[recordedDamage.Count - 1]) {
+                if (damageIndex >= damageListCount) {
+                    cache[key] = 0;
                     return 0;
                 }
 
-                seenDamageLast = true;
+                seenDamage++;
                 continue;
             }
 
-            string assumeDamageLine = GetNewStatusLine(statusLine, i, '#');
-            string assumeOperatingLine = GetNewStatusLine(statusLine, i, '.');
+            if (seenDamage > 0) {
+                if (damageCounts[damageIndex] != seenDamage) {
+                    cache[key] = 0;
+                    return 0;
+                }
 
-            if (!seenDamageLast) {
-                return GetComboCount(
-                    assumeDamageLine, damageCounts, totalDamage, lengthNeededForDamage)
-                    + GetComboCount(
-                        assumeOperatingLine, damageCounts, totalDamage, lengthNeededForDamage);
+                damageIndex++;
+                seenDamage = 0;
+                continue;
             }
-
-            int runningDamage = recordedDamage.Last();
-            int expectedDamage = damageCounts[recordedDamage.Count - 1];
-            if (runningDamage > expectedDamage) {
-                return 0;
-            } else if (runningDamage == expectedDamage) {
-                return GetComboCount(
-                    assumeOperatingLine, damageCounts, totalDamage, lengthNeededForDamage);
-            } else {
-                return GetComboCount(
-                    assumeDamageLine, damageCounts, totalDamage, lengthNeededForDamage);
-            }
-
         }
 
-        if (recordedDamage.Count != damageCounts.Count) {
+        if (damageIndex < damageListCount - 1) {
+            cache[key] = 0;
             return 0;
         }
 
-        for (int i = 0; i < recordedDamage.Count; i++) {
-            if (recordedDamage[i] != damageCounts[i]) {
-                return 0;
-            }
+        if (damageIndex == damageListCount - 1) {
+            int result = seenDamage == damageCounts[damageIndex] ? 1 : 0;
+            cache[key] = result;
+            return result;
         }
 
-        return 1;
+        if (damageIndex == damageListCount) {
+            int result = seenDamage == 0 ? 1 : 0;
+            cache[key] = result;
+            return result;
+        }
+
+        throw new ApplicationException();
     }
 
     private static bool IsComboPossible(
-            string statusLine,
-            List<int> damageCounts,
-            int totalDamage,
-            int lengthNeededForDamage) {
+            string statusLine, List<int> damageCounts, int damageIndex) {
+        int totalDamage = damageCounts
+            .GetRange(damageIndex, damageCounts.Count - damageIndex).Sum();
+        int lengthNeededForDamage = totalDamage + damageCounts.Count() - 1 - damageIndex;
 
         if (statusLine.Length < lengthNeededForDamage) {
             return false;
@@ -124,12 +135,6 @@ public class SpringStatus {
         }
 
         return true;
-    }
-
-    private static string GetNewStatusLine(string statusLine, int index, char newValue) {
-        char[] chars = statusLine.ToCharArray();
-        chars[index] = newValue;
-        return new string(chars);
     }
 
     public override string ToString() {
