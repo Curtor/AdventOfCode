@@ -61,7 +61,7 @@ public static class Solutions {
             {new Vector2Int(2023, 10),  new PipeMaze() },
             {new Vector2Int(2023, 11),  new CosmicExpansion() },
             {new Vector2Int(2023, 12),  new HotSprings() },
-            {new Vector2Int(2023, 13),  new Day13() },
+            {new Vector2Int(2023, 13),  new PointOfIncidence() },
             {new Vector2Int(2023, 14),  new Day14() },
             {new Vector2Int(2023, 15),  new Day15() },
             {new Vector2Int(2023, 16),  new Day16() },
