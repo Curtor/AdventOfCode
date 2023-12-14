@@ -1,4 +1,6 @@
-﻿namespace csteeves;
+﻿using System.Text;
+
+namespace csteeves;
 
 public class Grid<T> {
 
@@ -8,6 +10,8 @@ public class Grid<T> {
 
     private readonly GridNode<T>[,] nodes;
 
+    private string key;
+
     public Grid(int width, int height, bool allowDiag = false) {
         this.width = width;
         this.height = height;
@@ -15,6 +19,17 @@ public class Grid<T> {
 
         nodes = new GridNode<T>[width, height];
         InitializeNodes();
+    }
+
+    public Grid(Grid<T> grid) {
+        width = grid.width;
+        height = grid.height;
+        allowDiagonal = grid.allowDiagonal;
+
+        nodes = new GridNode<T>[width, height];
+        foreach (GridNode<T> node in grid.AllNodes()) {
+            nodes[node.coord.x, node.coord.y] = new GridNode<T>(node);
+        }
     }
 
     private void InitializeNodes() {
@@ -90,5 +105,17 @@ public class Grid<T> {
             }
             Console.WriteLine();
         }
+    }
+
+    public string GetKey() {
+        if (string.IsNullOrEmpty(key)) {
+            StringBuilder sb = new StringBuilder();
+            foreach (GridNode<T> node in nodes) {
+                sb.Append(node.value?.ToString());
+            }
+            key = sb.ToString();
+        }
+
+        return key;
     }
 }

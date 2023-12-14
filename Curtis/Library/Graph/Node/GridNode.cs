@@ -9,6 +9,11 @@ public class GridNode<T> : GraphNode<GridNode<T>, T> {
         this.heuristicDistance = node => coord.Distance(node.coord);
     }
 
+    public GridNode(GridNode<T> node) : base(node.value) {
+        coord = node.coord;
+        heuristicDistance = node.heuristicDistance;
+    }
+
     public override string ToString() {
         return $"Node {coord}: {value}";
     }
