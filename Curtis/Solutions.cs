@@ -64,7 +64,7 @@ public static class Solutions {
             {new Vector2Int(2023, 13),  new PointOfIncidence() },
             {new Vector2Int(2023, 14),  new ParabolicReflectorDish() },
             {new Vector2Int(2023, 15),  new LensLibrary() },
-            {new Vector2Int(2023, 16),  new Day16() },
+            {new Vector2Int(2023, 16),  new TheFloorWillBeLava() },
             {new Vector2Int(2023, 17),  new Day17() },
             {new Vector2Int(2023, 18),  new Day18() },
             {new Vector2Int(2023, 19),  new Day19() },
