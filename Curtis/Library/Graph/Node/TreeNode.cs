@@ -9,7 +9,7 @@ public class TreeNode<N, T> : Node<N, T> where N : TreeNode<N, T> {
     public TreeNode() : base() { }
     public TreeNode(T value) : base(value) { }
 
-    protected override IEnumerable<NodeNeighbor<N, T>> NextNodes() {
+    public override IEnumerable<NodeNeighbor<N, T>> NextNodes() {
         return Children;
     }
 }

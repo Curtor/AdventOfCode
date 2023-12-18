@@ -42,6 +42,7 @@ public class TheFloorWillBeLava : DaySolution2023 {
 
         Console.WriteLine($"Max energized tiles: {maxEnergizedTiles}");
     }
+
     private static Grid<LightTile> CreateGrid(List<string> input) {
         int width = input[0].Length;
         int height = input.Count;

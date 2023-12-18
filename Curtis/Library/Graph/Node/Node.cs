@@ -118,7 +118,7 @@ public abstract class Node<N, T> where N : Node<N, T> {
         return Tuple.Create(closestNode, closestDistance);
     }
 
-    protected abstract IEnumerable<NodeNeighbor<N, T>> NextNodes();
+    public abstract IEnumerable<NodeNeighbor<N, T>> NextNodes();
 
     public override string ToString() {
         return $"Node: {value}";

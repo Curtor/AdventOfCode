@@ -94,14 +94,14 @@ public class Grid<T> {
     }
 
     public void PrettyPrint() {
-        PrettyPrint(v => v?.ToString());
+        PrettyPrint(node => node.value?.ToString());
     }
 
-    public void PrettyPrint(Func<T, string> toString) {
+    public void PrettyPrint(Func<GridNode<T>, string> toString) {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 GridNode<T> current = nodes[x, y];
-                Console.Write($"{toString(current.value),-2}");
+                Console.Write($"{toString(current),-2}");
             }
             Console.WriteLine();
         }
