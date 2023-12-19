@@ -1,21 +1,19 @@
-﻿using static csteeves.Advent2023.PartRanking;
-
-namespace csteeves.Advent2023;
+﻿namespace csteeves.Advent2023;
 
 public class Condition {
 
-    private enum Operator { GT, LT, TRUE }
+    public enum Operator { GT, LT, TRUE }
 
-    private readonly PartRanking.Category category;
-    private readonly Operator op;
-    private readonly int threshold;
+    public readonly PartRanking.Category category;
+    public readonly Operator op;
+    public readonly int threshold;
 
     public readonly string targetName;
 
     public Condition(string s) {
         List<string> tokens = LineParser.Tokens(s, ":");
         if (tokens.Count == 1) {
-            category = Category.UNSPECIFIED;
+            category = PartRanking.Category.UNSPECIFIED;
             op = Operator.TRUE;
             threshold = 0;
 
@@ -38,6 +36,34 @@ public class Condition {
         threshold = int.Parse(coperationTokens[1]);
 
         targetName = tokens[1];
+    }
+
+    private Condition(
+            PartRanking.Category category, Operator op, int threshold, string targetName) {
+        this.category = category;
+        this.op = op;
+        this.threshold = threshold;
+        this.targetName = targetName;
+    }
+
+    public static Condition Inverse(Condition condition) {
+        Operator op;
+        int threshold = condition.threshold;
+
+        switch (condition.op) {
+            case Operator.GT:
+                op = Operator.LT;
+                threshold++;
+                break;
+            case Operator.LT:
+                op = Operator.GT;
+                threshold--;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        return new Condition(condition.category, op, threshold, condition.targetName);
     }
 
     public bool Met(PartRanking ranking) {

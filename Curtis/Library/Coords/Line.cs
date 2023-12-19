@@ -13,7 +13,7 @@ public class Line {
     public Line(int xA, int yA, int xB, int yB)
         : this(new Vector2Int(xA, yA), new Vector2Int(xB, yB)) { }
 
-    internal bool isDiagonal() {
+    public bool isDiagonal() {
         return pointA.x != pointB.x && pointA.y != pointB.y;
     }
 

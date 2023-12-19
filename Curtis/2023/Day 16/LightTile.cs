@@ -1,9 +1,7 @@
 ﻿
-
-
 namespace csteeves.Advent2023;
 
-internal class LightTile {
+public class LightTile {
 
     public enum Direction { RIGHT, DOWN, LEFT, UP }
 
@@ -107,7 +105,7 @@ internal class LightTile {
         return character.ToString();
     }
 
-    internal void Reset() {
+    public void Reset() {
         light = [];
     }
 }

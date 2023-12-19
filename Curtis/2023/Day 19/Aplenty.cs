@@ -32,6 +32,15 @@ public class Aplenty : DaySolution2023 {
     }
 
     public override void Part2(List<string> input) {
-        Console.WriteLine($"Answer 2: {input[0]}");
+        WorkflowHandler handler = new WorkflowHandler();
+        foreach (string line in input) {
+            if (string.IsNullOrEmpty(line)) {
+                break;
+            }
+            handler.Add(new Workflow(line));
+        }
+
+        long numAcceptedCombos = handler.GetAcceptedCombos();
+        Console.WriteLine($"Possible combinations: {numAcceptedCombos}");
     }
 }

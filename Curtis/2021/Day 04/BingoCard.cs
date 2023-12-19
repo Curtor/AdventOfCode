@@ -72,7 +72,7 @@ public class BingoCard {
         return true;
     }
 
-    internal int GetUnmarkedSum() {
+    public int GetUnmarkedSum() {
         int sum = 0;
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 5; col++) {
@@ -84,7 +84,7 @@ public class BingoCard {
         return sum;
     }
 
-    internal void PrettyPrint() {
+    public void PrettyPrint() {
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 5; col++) {
                 int value = grid[row, col];

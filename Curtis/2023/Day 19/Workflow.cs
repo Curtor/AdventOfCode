@@ -1,12 +1,11 @@
-﻿
-namespace csteeves.Advent2023;
+﻿namespace csteeves.Advent2023;
 
-internal class Workflow {
+public class Workflow {
 
     public readonly string line;
     public readonly string name;
 
-    private List<Condition> conditions = [];
+    private readonly List<Condition> conditions = [];
 
     public Workflow(string line) {
         this.line = line;
@@ -31,7 +30,44 @@ internal class Workflow {
         throw new ApplicationException();
     }
 
+    public IEnumerable<string> TargetWorkflows() {
+        return conditions.Select(c => c.targetName);
+    }
+
     public override string ToString() {
         return line;
+    }
+
+    public IEnumerable<AcceptedPartConditions> AcceptedPartConditions(
+            AcceptedPartConditions currentPartConditions) {
+
+        AcceptedPartConditions acceptedPartConditions =
+            new AcceptedPartConditions(name, currentPartConditions);
+
+        for (int i = 0; i < conditions.Count; i++) {
+            Condition condition = conditions[i];
+
+            if (condition.targetName.Equals(currentPartConditions.target)) {
+                if (condition.op == Condition.Operator.TRUE) {
+                    yield return acceptedPartConditions;
+                    yield break;
+                }
+
+                AcceptedPartConditions continuePartConditions =
+                    new AcceptedPartConditions(acceptedPartConditions);
+                acceptedPartConditions.Add(condition, true);
+                continuePartConditions.Add(condition, false);
+
+                yield return acceptedPartConditions;
+                acceptedPartConditions = continuePartConditions;
+                continue;
+            }
+
+            if (condition.op == Condition.Operator.TRUE) {
+                yield break;
+            }
+
+            acceptedPartConditions.Add(condition, false);
+        }
     }
 }

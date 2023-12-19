@@ -44,7 +44,7 @@ public class DeviceDirectory : IComparable<DeviceDirectory> {
         return total;
     }
 
-    internal List<DeviceDirectory> GetAllDir() {
+    public List<DeviceDirectory> GetAllDir() {
         List<DeviceDirectory> result = [this];
         foreach (DeviceDirectory sub in Subs) {
             result.AddRange(sub.GetAllDir());
