@@ -44,7 +44,7 @@ public class ClumsyCrucible : DaySolution2023 {
         while (queue.Any()) {
             CrucibleMove currentMove = queue.Dequeue();
             if (currentMove.current == targetNode && currentMove.LegLength >= minLegLength) {
-                PrettyPrintPath(grid, currentMove);
+                //PrettyPrintPath(grid, currentMove);
                 return currentMove.accumulatedHeat;
             }
             EnqueueNextMoves(currentMove, queue, visited, targetNode);

@@ -12,6 +12,11 @@ public class Vector2Int {
         this.y = y;
     }
 
+    public Vector2Int(Vector2Int other) {
+        this.x = other.x;
+        this.y = other.y;
+    }
+
     public float Magnitude(Vector2Int other) {
         return Distance(ORIGIN);
     }

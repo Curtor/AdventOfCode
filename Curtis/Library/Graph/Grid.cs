@@ -2,6 +2,34 @@
 
 namespace csteeves;
 
+public class Grid {
+    public enum Direction { LEFT, RIGHT, UP, DOWN }
+
+    public static Direction DirectionFrom(char token) {
+        switch (token) {
+            case 'l':
+            case 'L':
+            case '<':
+                return Direction.LEFT;
+            case 'r':
+            case 'R':
+            case '>':
+                return Direction.RIGHT;
+            case 'u':
+            case 'U':
+            case '^':
+                return Direction.UP;
+            case 'd':
+            case 'D':
+            case 'v':
+            case 'V':
+                return Direction.DOWN;
+        }
+
+        throw new ArgumentOutOfRangeException();
+    }
+}
+
 public class Grid<T> {
 
     public readonly int width;
@@ -50,6 +78,46 @@ public class Grid<T> {
         }
     }
 
+    public IEnumerable<GridNode<T>> PerimeterNodes() {
+        for (int x = 0; x < width; x++) {
+            yield return nodes[x, 0];
+            yield return nodes[x, height - 1];
+        }
+        for (int y = 1; y < height - 1; y++) {
+            yield return nodes[0, y];
+            yield return nodes[width - 1, y];
+        }
+    }
+
+    public NodeNeighbor<GridNode<T>, T>? GetNeighbor(GridNode<T> node, Grid.Direction direction) {
+        Vector2Int neighborCoord = new Vector2Int(node.coord);
+        switch (direction) {
+            case Grid.Direction.LEFT:
+                neighborCoord.x--;
+                break;
+            case Grid.Direction.RIGHT:
+                neighborCoord.x++;
+                break;
+            case Grid.Direction.UP:
+                neighborCoord.y--;
+                break;
+            case Grid.Direction.DOWN:
+                neighborCoord.y++;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        if (neighborCoord.x < 0 || neighborCoord.x >= width
+            || neighborCoord.y < 0 || neighborCoord.y >= height) {
+            return null;
+        }
+
+        return node.Neighbors.FirstOrDefault(n
+            => n.neighbor.coord.Equals(neighborCoord), null);
+
+    }
+
     public void SetValues(Func<GridNode<T>, T> value) {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -94,7 +162,7 @@ public class Grid<T> {
     }
 
     public void PrettyPrint() {
-        PrettyPrint(node => node.value?.ToString());
+        PrettyPrint(node => node.value == null ? "." : node.value.ToString());
     }
 
     public void PrettyPrint(Func<GridNode<T>, string> toString) {

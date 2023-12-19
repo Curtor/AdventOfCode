@@ -3,6 +3,9 @@ namespace csteeves;
 
 public abstract class DaySolution {
 
+    private const bool RUN_PART_1 = true;
+    private const bool RUN_PART_2 = true;
+
     public void RunDebug() {
         Run(Runner.DEBUG_INPUT, Runner.DEBUG_ALT_INPUT);
     }
@@ -23,11 +26,16 @@ public abstract class DaySolution {
             throw new FileNotFoundException(filename);
         }
 
-        Console.WriteLine("Part 1");
-        Part1(input);
-        Console.WriteLine();
-        Console.WriteLine("Part 2");
-        Part2(partTwoInput ?? input);
+        if (RUN_PART_1) {
+            Console.WriteLine("Part 1");
+            Part1(input);
+        }
+
+        if (RUN_PART_2) {
+            Console.WriteLine();
+            Console.WriteLine("Part 2");
+            Part2(partTwoInput ?? input);
+        }
     }
 
     private List<string>? ReadLines(string filename) {
