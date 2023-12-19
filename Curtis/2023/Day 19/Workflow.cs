@@ -38,36 +38,21 @@ public class Workflow {
         return line;
     }
 
-    public IEnumerable<AcceptedPartConditions> AcceptedPartConditions(
-            AcceptedPartConditions currentPartConditions) {
+    public IEnumerable<WorkflowConditions> NextWorkflowConditions(
+            WorkflowConditions currentConditions) {
 
-        AcceptedPartConditions acceptedPartConditions =
-            new AcceptedPartConditions(name, currentPartConditions);
-
-        for (int i = 0; i < conditions.Count; i++) {
-            Condition condition = conditions[i];
-
-            if (condition.targetName.Equals(currentPartConditions.target)) {
-                if (condition.op == Condition.Operator.TRUE) {
-                    yield return acceptedPartConditions;
-                    yield break;
-                }
-
-                AcceptedPartConditions continuePartConditions =
-                    new AcceptedPartConditions(acceptedPartConditions);
-                acceptedPartConditions.Add(condition, true);
-                continuePartConditions.Add(condition, false);
-
-                yield return acceptedPartConditions;
-                acceptedPartConditions = continuePartConditions;
-                continue;
-            }
-
+        foreach (Condition condition in conditions) {
             if (condition.op == Condition.Operator.TRUE) {
+                yield return new WorkflowConditions(condition.targetName, currentConditions);
                 yield break;
             }
 
-            acceptedPartConditions.Add(condition, false);
+            WorkflowConditions acceptedConditions =
+                new WorkflowConditions(condition.targetName, currentConditions);
+            acceptedConditions.Add(condition);
+            yield return new WorkflowConditions(condition.targetName, acceptedConditions);
+
+            currentConditions.Add(condition, false);
         }
     }
 }

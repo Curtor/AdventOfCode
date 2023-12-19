@@ -1,28 +1,24 @@
 ﻿namespace csteeves.Advent2023;
 
-public class AcceptedPartConditions {
+public class WorkflowConditions {
 
     private readonly int PART_CATEGORY_MIN = 1;
     private readonly int PART_CATEGORY_MAX = 4000;
 
-    public readonly string target;
+    public readonly string workflowName;
 
+    // Conditions needed to reach the start of the workflow named above.
     private readonly List<Condition> conditions = [];
 
-    public AcceptedPartConditions(string target) {
-        this.target = target;
+    public WorkflowConditions(string workflow) {
+        this.workflowName = workflow;
     }
 
-    public AcceptedPartConditions(string target, AcceptedPartConditions other)
-        : this(target) {
+    public WorkflowConditions(string workflow, WorkflowConditions other) : this(workflow) {
         conditions.AddRange(other.conditions);
     }
 
-    public AcceptedPartConditions(AcceptedPartConditions other)
-        : this(other.target, other) { }
-
-
-    public void Add(Condition condition, bool meet) {
+    public void Add(Condition condition, bool meet = true) {
         if (meet) {
             conditions.Add(condition);
         } else {

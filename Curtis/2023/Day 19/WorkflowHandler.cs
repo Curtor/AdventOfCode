@@ -3,14 +3,9 @@
 public class WorkflowHandler {
 
     private Dictionary<string, Workflow> workflows = [];
-    private Dictionary<string, List<Workflow>> workflowsWithTarget = [];
 
     public void Add(Workflow workflow) {
         workflows[workflow.name] = workflow;
-
-        foreach (string target in workflow.TargetWorkflows()) {
-            workflowsWithTarget.GetOrCreate(target).Add(workflow);
-        }
     }
 
     public bool RunWorkflows(PartRanking ranking) {
@@ -31,33 +26,30 @@ public class WorkflowHandler {
     }
 
     public long GetAcceptedCombos() {
-        Queue<Tuple<Workflow, AcceptedPartConditions>> queue =
-            new Queue<Tuple<Workflow, AcceptedPartConditions>>(
-                workflowsWithTarget["A"].Select(w
-                    => Tuple.Create(w, new AcceptedPartConditions("A"))));
-
         long result = 0;
+        Queue<WorkflowConditions> queue = [];
+        queue.Enqueue(new WorkflowConditions("in"));
+
         while (queue.Any()) {
-            Tuple<Workflow, AcceptedPartConditions> current = queue.Dequeue();
-            Workflow workflow = current.Item1;
-            AcceptedPartConditions conditions = current.Item2;
+            WorkflowConditions workflowConditions = queue.Dequeue();
+            string workflowName = workflowConditions.workflowName;
 
-            foreach (AcceptedPartConditions newConditions
-                    in workflow.AcceptedPartConditions(conditions)) {
-
-                if (newConditions.target.Equals("in")) {
-                    result += newConditions.DistinctCombos();
-                    continue;
-                }
-
-                foreach (Workflow nextWorkflow in workflowsWithTarget[newConditions.target]) {
-                    AcceptedPartConditions nextConditions =
-                            new AcceptedPartConditions(newConditions.target, newConditions);
-                    queue.Enqueue(Tuple.Create(nextWorkflow, nextConditions));
-                }
+            if (workflowName.Equals("R")) {
+                continue;
             }
 
+            if (workflowName.Equals("A")) {
+                result += workflowConditions.DistinctCombos();
+                continue;
+            }
+
+            Workflow workflow = workflows[workflowName];
+            foreach (WorkflowConditions nextConditions
+                    in workflow.NextWorkflowConditions(workflowConditions)) {
+                queue.Enqueue(nextConditions);
+            }
         }
+
         return result;
     }
 }
