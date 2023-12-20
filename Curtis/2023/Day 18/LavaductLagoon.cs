@@ -11,15 +11,19 @@ public class LavaductLagoon : DaySolution2023 {
             GetDigInstructions(input, s => new DigInstruction(s));
         DigSite digSite = new DigSite(digInstructions);
         long interiorSize = digSite.GetInteriorSize();
-        Console.WriteLine($"Hole size: {interiorSize}");
+        Console.WriteLine($"Dig site size: {interiorSize}");
+
+        DigSiteV2 digSite2 = new DigSiteV2(digInstructions);
+        interiorSize = digSite2.GetInteriorSize();
+        Console.WriteLine($"Dig site V2 size: {interiorSize}");
     }
 
     public override void Part2(List<string> input) {
         List<DigInstruction> digInstructions =
             GetDigInstructions(input, s => DigInstruction.ParseHex(s));
-        DigSite digSite = new DigSite(digInstructions);
+        DigSiteV2 digSite = new DigSiteV2(digInstructions);
         long interiorSize = digSite.GetInteriorSize();
-        Console.WriteLine($"Hole size: {interiorSize}");
+        Console.WriteLine($"Dig site size: {interiorSize}");
     }
 
     private List<DigInstruction> GetDigInstructions(
