@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 public class Runner {
 
-    public const string PATH = @"F:\Coding\AdventOfCode\Curtis\";
+    public const string PATH = @"C:\Users\IdTestAccount\Source\Repos\Curtor\AdventOfCode\Curtis";
 
     public const string DEBUG_INPUT = "Debug.txt";
     public const string DEBUG_ALT_INPUT = "DebugPart2.txt";
@@ -13,7 +13,7 @@ public class Runner {
     public const string REAL_ALT_INPUT = "InputPart2.txt";
 
     private static readonly int YEAR = 2023;
-    private static readonly int DAY = 19;
+    private static readonly int DAY = 20;
 
     private static readonly bool RUN_DEBUG = true;
     private static readonly bool DEBUG_ONLY = false;

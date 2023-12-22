@@ -15,4 +15,8 @@
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="2023\Day 20\Input\" />
+  </ItemGroup>
+
 </Project>

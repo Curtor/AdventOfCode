@@ -68,7 +68,7 @@ public static class Solutions {
             {new Vector2Int(2023, 17),  new ClumsyCrucible() },
             {new Vector2Int(2023, 18),  new LavaductLagoon() },
             {new Vector2Int(2023, 19),  new Aplenty() },
-            {new Vector2Int(2023, 20),  new Day20() },
+            {new Vector2Int(2023, 20),  new PulsePropagation() },
             {new Vector2Int(2023, 21),  new Day21() },
             {new Vector2Int(2023, 22),  new Day22() },
             {new Vector2Int(2023, 23),  new Day23() },
